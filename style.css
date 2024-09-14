@@ -1,0 +1,83 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body, html {
+    height: 100%;
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+    line-height: 1.6;
+  }
+  
+  #about {
+    height: 100vh; /* Ocupa toda a altura da tela */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    flex-direction: column;
+  }
+  
+  .profile-container {
+    text-align: center;
+    position: relative; /* Permite posicionar a imagem no centro do GIF */
+  }
+  
+  h2 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+    transition: color 0.3s, transform 0.3s;
+  }
+  
+  .profile-pic {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%; /* Manterá a imagem circular */
+    margin-bottom: 0; /* Sem espaço extra entre o GIF e a imagem */
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+  
+  /* Estilo da imagem dentro do embed */
+  .custom-image {
+    width: 50px;  /* Tamanho menor */
+    height: 50px;
+    transition: transform 0.3s;
+  }
+  
+  /* Efeito hover no nome "Darkzin" */
+  #darkzin-title:hover {
+    color: #ff6347; /* Muda a cor do texto para laranja quando o mouse passa */
+    transform: scale(1.1); /* Aumenta o tamanho levemente */
+  }
+  
+  /* Efeito hover na imagem (GIF) */
+  #profile-pic:hover {
+    transform: scale(1.2); /* Aumenta o tamanho da imagem */
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.5); /* Adiciona uma sombra ao redor da imagem */
+  }
+  
+  /* Efeito hover na imagem dentro do embed */
+  .custom-image:hover {
+    transform: scale(1.2); /* Aumenta a imagem quando o mouse passa por cima */
+  }
+  
+  /* Estilo para o embed */
+  .embed-container {
+    margin-top: 60px; /* Espaço abaixo da imagem personalizada */
+    padding: 15px;
+    border: 2px solid #ccc;
+    border-radius: 10px;
+    background-color: #f9f9f9;
+    width: 100px;  /* Ajustado para o tamanho da imagem */
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+  
+  .embed-container:hover {
+    transform: scale(1.05); /* Efeito de zoom */
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2); /* Sombra maior */
+  }
+  

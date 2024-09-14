@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Meu Site</title>
+
+  <!-- Fonte do Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
+
+  <style>
+    /* Centralizando o conteúdo da página */
+    body {
+      background-image: url('https://exploringbits.com/wp-content/uploads/2022/01/discord-banner-4.gif');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      margin: 0;
+      font-family: Arial, sans-serif;
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh; /* Ocupa a altura total da tela */
+      overflow: hidden;
+    }
+
+    /* Tela borrada cobrindo tudo inicialmente */
+    .overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      backdrop-filter: blur(15px); /* Efeito de desfoque */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: rgba(0, 0, 0, 0.5); /* Fundo semitransparente */
+      z-index: 9999;
+    }
+
+    /* Botão de play no meio da tela */
+    .play-button {
+      background: url('https://cdn-icons-png.flaticon.com/512/727/727245.png') no-repeat center;
+      background-size: contain;
+      width: 100px;
+      height: 100px;
+      cursor: pointer;
+      border: none;
+      outline: none;
+    }
+
+    /* Estilo para o embed */
+    .embed-box {
+      border: 2px solid #1e90ff;
+      padding: 20px;
+      border-radius: 10px;
+      width: 80%; /* Largura da caixa */
+      max-width: 600px;
+      background-color: rgba(0, 0, 0, 0.5); /* Fundo preto semitransparente */
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 20px;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Estilo para o título "Darkzin" com fonte estilizada */
+    #darkzin-title {
+      font-family: 'Lobster', cursive; /* Fonte Lobster */
+      color: #0d1a3a;
+      text-shadow: 0px 0px 10px #1e90ff, 0px 0px 20px #1e90ff;
+      font-size: 2.5em;
+      margin: 0;
+    }
+
+    .profile-pic {
+      border-radius: 50%;
+      width: 200px;
+      height: 200px;
+    }
+
+    .custom-image, .spotify-image {
+      width: 50px;
+      height: 50px;
+      margin: 0 10px;
+    }
+
+    .image-container {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin-top: 20px;
+    }
+
+    a {
+      color: white;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    /* Adicionando estilo para as imagens de penas */
+    .feather {
+      width: 100px;
+      height: auto;
+    }
+
+    .left-feather {
+      margin-right: 10px;
+    }
+
+    .right-feather {
+      margin-left: 10px;
+    }
+
+    .content {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+    }
+
+    /* Estilo das imagens abaixo do GIF */
+    .custom-icons {
+      margin-top: 20px;
+      width: 50px; /* Redimensionando para 50px */
+      height: auto;
+      cursor: pointer; /* Para deixar claro que é clicável */
+    }
+
+    /* Efeito de diamantes roxos ao redor do mouse */
+    .diamond {
+      position: absolute;
+      width: 30px;
+      height: 30px;
+      background: transparent;
+      border: 2px solid rgba(128, 0, 128, 0.8); /* Cor roxa */
+      border-radius: 50%;
+      clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%); /* Forma de diamante */
+      box-shadow: 0 0 10px rgba(128, 0, 128, 0.8); /* Brilho ao redor */
+      pointer-events: none;
+      animation: diamondEffect 0.8s forwards;
+    }
+
+    @keyframes diamondEffect {
+      0% {
+        transform: scale(0.5);
+        opacity: 1;
+      }
+      100% {
+        transform: scale(2);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Música a ser tocada -->
+  <audio id="myAudio" src="file:///C:/Users/WINDOWS%2011/Downloads/MC%20IG,%20MC%20RYAN%20SP%20-%20FERNANDO%20DE%20NORONHA%202%20(DJ%20MURILLO%20E%20LT%20NO%20BEAT)%20[FAIXA%2004%20-%20BAD%20BOYS].mp3" type="audio/mpeg"></audio>
+
+  <!-- Tela inicial com o botão de play -->
+  <div class="overlay" id="overlay">
+    <button class="play-button" id="playBtn"></button>
+  </div>
+
+  <!-- Caixa de embed ao redor do conteúdo -->
+  <div class="embed-box">
+    <div class="content">
+      <!-- Imagem da pena esquerda -->
+      <img src="https://thordemon.netlify.app/images/featherblack.png" alt="Pena Esquerda" class="feather left-feather">
+      
+      <!-- GIF personalizado -->
+      <img src="https://cdn.discordapp.com/avatars/1006318772421926912/a_ab06cb1195b0a51937dbcc96e9102a42.gif?size=2048" alt="Imagem em GIF" class="profile-pic" id="profile-pic">
+      
+      <!-- Imagem da pena direita -->
+      <img src="https://thordemon.netlify.app/images/featherblack2.png" alt="Pena Direita" class="feather right-feather">
+    </div>
+
+    <!-- Nome Darkzin abaixo do GIF -->
+    <div id="darkzin-title">Darkzin</div>
+
+    <!-- Imagens do Spotify e Discord abaixo do nome -->
+    <div class="image-container">
+      <a href="https://open.spotify.com/user/317grqotinjb2jz27zvozg6qg6uu?si=Dfs51acUR1CGzIy7jQ8GFw" target="_blank">
+        <img src="https://th.bing.com/th/id/R.f7ce343ed66e80d60e87479d2c6753c3?rik=mZlpLMbwFr3BQg&riu=http%3a%2f%2fpluspng.com%2fimg-png%2fspotify-logo-png-open-2000.png&ehk=ZCBP9f2uKAkYi2gLrP%2fkO3Tjpcf49Bki%2fwcRu4kBXb0%3d&risl=&pid=ImgRaw&r=0" alt="Spotify" class="custom-icons">
+      </a>
+      <a href="https://discord.gg/tcfode" target="_blank">
+        <img src="https://logodownload.org/wp-content/uploads/2017/11/discord-logo-2-1.png" alt="Discord" class="custom-icons">
+      </a>
+    </div>
+  </div>
+
+  <script>
+    const playBtn = document.getElementById('playBtn');
+    const overlay = document.getElementById('overlay');
+    const audio = document.getElementById('myAudio');
+
+    // Função para tocar a música e remover o overlay quando clicar no play
+    playBtn.addEventListener('click', function() {
+      audio.play();
+      overlay.style.display = 'none'; // Remove o overlay borrado
+    });
+
+    // Função para criar o efeito de diamantes roxos ao passar o mouse
+    document.addEventListener('mousemove', function(event) {
+      const diamond = document.createElement('div');
+      diamond.classList.add('diamond');
+      diamond.style.left = `${event.pageX - 15}px`;
+      diamond.style.top = `${event.pageY - 15}px`;
+
+      document.body.appendChild(diamond);
+
+      // Remove o efeito após 800ms
+      setTimeout(() => {
+        diamond.remove();
+      }, 800);
+    });
+  </script>
+
+</body>
+</
